@@ -113,3 +113,14 @@ label {
 	margin: 0;
 	padding: 0.5em;
 }
+
+/*Flash Notice Style*/
+
+#notice {
+	border: 1px solid green;
+	padding: 1em;
+	margin:  1em;
+	margin-bottom: 2em;
+	background-color: lightgray;
+	font: bold smaller sans-serif;
+}

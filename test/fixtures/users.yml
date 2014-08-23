@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+welcome to railsSpace: 
+	screen_name:bishisht
+	email:bishisht@exammple.com 
+	password:bandana	
 # column: value
 #
-two: {}
+two: 
+	screen_name:bandana
+	email:bishisht@gmail.com
+	password:bandana
 #  column: value
