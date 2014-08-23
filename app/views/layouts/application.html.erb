@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="whole_page">
+	<div id="header">RailsSpace</div>
+	<div id="nav">
+		<%= nav_link "Home", "site" %> |
+		<%= nav_link "About Us", "site" %> |
+		<%= nav_link "Help", "site" %>  |	
+		<%= nav_link "Register", "user", "register" %>
+	</div>
+	<div id="content">		
+		<% if flash[:notice] -%>
+			<div id="notice"></div> <%= flash[:notice] %> </div>
+		<% end -%>	
+		<%= yield %>				
+	</div>
+	<% if ENV["RAILS_ENV"] == "development" %>
+			<%= debug(params) %>
+	<% end -%>
+</div>
+</body>
+</html>
