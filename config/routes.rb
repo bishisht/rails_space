@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'user/index'
   post 'user/register'
+  post 'user/login'
 
 
   get 'site/index'

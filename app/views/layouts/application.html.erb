@@ -3,7 +3,7 @@
 <head>
   <title><%= @title %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'default',  'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,10 +11,13 @@
 <div id="whole_page">
 	<div id="header">RailsSpace</div>
 	<div id="nav">
+		<span style="float:right">
+			<%= nav_link "Register", "user", "register" %> |
+			<%= nav_link "Login", "user", "login" %>
+		</span>
 		<%= nav_link "Home", "site" %> |
 		<%= nav_link "About Us", "site" %> |
-		<%= nav_link "Help", "site" %>  |	
-		<%= nav_link "Register", "user", "register" %>
+		<%= nav_link "Help", "site" %>  |			
 	</div>
 	<div id="content">		
 		<% if flash[:notice] -%>
@@ -23,7 +26,18 @@
 		<%= yield %>				
 	</div>
 	<% if ENV["RAILS_ENV"] == "development" %>
-			<%= debug(params) %>
+		<div id="debug">
+			<a href="#" onclick="Element.toggle('params_debug_info'); return false">Params</a> |
+			<a href="#" onclick="Element.toggle('session_debug_info'); return false">Session</a>
+			<fieldset id="params_debug_info" class="debug_info" style="display:none">
+				<legend>Params</legend>
+				<%= debug(params) %>
+			</fieldset>
+			<fieldset id="session_debug_info" class="debug_info" style="display:none">
+				<legend>Session</legend>
+				<%= debug(session) %>
+			</fieldset>
+		</div>
 	<% end -%>
 </div>
 </body>
