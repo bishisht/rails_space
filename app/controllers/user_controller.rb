@@ -11,13 +11,13 @@ class UserController < ApplicationController
     # This will be a protedted page for viewing user information.
   end
 
-  # This action is used for simple login functionality
+  
   def login
     # This action is used for logging in users.
 
     @title="Log in to RailsSpace"
     if request.get?
-      @user=User.new(:remember_me => cookies[:remember_me] || "0")
+      @user=User.new(:remember_me => remember_me_string)
     # if request and params[:user]
     elsif param_posted?(:user)
       @user=User.new(user_params)
@@ -26,20 +26,20 @@ class UserController < ApplicationController
         session[:user_id]=user.id
         # user.login!(session)
         if @user.remember_me == "1"
-          # The box is checked, so set the remember_me cookie.
-          cookies[:remember_me] = { :value => "1",
-                                    :expires => 10.years.from_now }
-          # user.authorization_token = user.id
-          user.authorization_token = Digest::SHA1.hexdigest(
-                                      "#{user.screen_name}:
-                                      #{user.paassword}")
-          user.save!
-          cookies[:authorization_token] = {
-            :value => user.authorization_token,
-            :expires => 10.years.from_now }
+          user.remember!(cookies)
+          # # The box is checked, so set the remember_me cookie.
+          # cookies[:remember_me] = { :value => "1",
+          #                           :expires => 10.years.from_now }
+          # # user.authorization_token = user.id
+          # user.authorization_token = Digest::SHA1.hexdigest(
+          #                             "#{user.screen_name}:
+          #                             #{user.paassword}")
+          # user.save!
+          # cookies[:authorization_token] = {
+          #   :value => user.authorization_token,
+          #   :expires => 10.years.from_now }
         else
-          cookies.delete(:remember_me)
-          cookies.delete(:authorization_token)
+          user.forget!(cookies)
         end
         flash[:notice] = "User #{user.screen_name} logged in!"
         redirect_to_forwarding_url
@@ -121,6 +121,11 @@ class UserController < ApplicationController
     else
       redirect_to :action => 'index'
     end
+  end
+
+  # Return a string with the status of the remember me checkbox.
+  def remember_me_string
+    cookies[:remember_me] || "0"
   end
 
 
