@@ -12,8 +12,7 @@
 	<div id="header">RailsSpace</div>
 	<div id="nav">
 		<span style="float:right">
-		<% if logged_in? -%>
-			welcome <i><%= @user.screen_name %></i>  |
+		<% if logged_in? -%>			
 			<%= nav_link "Hub", "user", "index"  %> |
 			<%= nav_link "Logout", "user", "logout"  %> |
 		<% else -%>
@@ -30,21 +29,7 @@
 			<div id="notice"> <%= flash[:notice] %> </div>
 		<% end -%>	
 		<%= yield %>				
-	</div>
-	<% if ENV["RAILS_ENV"] == "development" %>
-		<div id="debug">
-			<a href="#" onclick="Element.toggle('params_debug_info'); return false">Params</a> |
-			<a href="#" onclick="Element.toggle('session_debug_info'); return false">Session</a>
-			<fieldset id="params_debug_info" class="debug_info" style="display:none">
-				<legend>Params</legend>
-				<%= debug(params) %>
-			</fieldset>
-			<fieldset id="session_debug_info" class="debug_info" style="display:none">
-				<legend>Session</legend>
-				<%= debug(session) %>
-			</fieldset>
-		</div>
-	<% end -%>
+	</div>	
 </div>
 </body>
 </html>

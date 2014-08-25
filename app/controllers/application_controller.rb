@@ -20,4 +20,6 @@ class ApplicationController < ActionController::Base
         # end
     end
   end
+
+  # screen_name = User.screen_name
 end
