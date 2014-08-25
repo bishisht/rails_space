@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	attr_accessor :remember_me
 	# Max & min lengths for all fields
 	SCREEN_NAME_MIN_LENGTH =4
 	SCREEN_NAME_MAX_LENGTH = 20
@@ -35,5 +36,21 @@ class User < ActiveRecord::Base
 		if screen_name.include?(" ")
 			errors.add(:screen_name, "cannot include spaces.")
 		end
+	end
+
+	# Log a user in.
+	def login!(session)
+		session[:user_id]=id
+	end
+
+	#Log a user out.
+	def self.logout!(session)
+		session[:user_id]=nil
+		cookies.delete(:authorization_token)
+	end
+
+	# Clear the password (typically to suppress its display in a view.).
+	def clear_password!
+		self.password=nil
 	end
 end

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'user/index'
   post 'user/register'
   post 'user/login'
+  get 'user/login'
+
+  # resources :user
 
 
   get 'site/index'

@@ -73,6 +73,12 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-logout-21">::logout!</a>
+    
+    <li ><a href="#method-i-clear_password-21">#clear_password!</a>
+    
+    <li ><a href="#method-i-login-21">#login!</a>
+    
     <li ><a href="#method-i-validate">#validate</a>
     
   </ul>
@@ -162,10 +168,117 @@
     
 
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-logout-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">logout!</span><span
+            class="method-args">(session)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Log a user out.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="logout-21-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">logout!</span>(<span class="ruby-identifier">session</span>)
+        <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-clear_password-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">clear_password!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Clear the password (typically to suppress its display in a view.).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="clear_password-21-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_password!</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>=<span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-login-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">login!</span><span
+            class="method-args">(session)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Log a user in.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="login-21-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">login!</span>(<span class="ruby-identifier">session</span>)
+        <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-identifier">id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-validate" class="method-detail ">
