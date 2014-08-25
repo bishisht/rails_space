@@ -1,24 +1,52 @@
 require 'digest/sha1'
+
+# Simple model for users
 class User < ActiveRecord::Base
+
+	# Remember me attribute. This will remember the user 
+	# after they have closed the browser window.
 	attr_accessor :remember_me
+	attr_accessor :current_password
+
 	# Max & min lengths for all fields
-	SCREEN_NAME_MIN_LENGTH =4
+	
+	#Screen name minimum length
+	SCREEN_NAME_MIN_LENGTH =4	
+
+	# Screen name maximum length
 	SCREEN_NAME_MAX_LENGTH = 20
+
+	# Minumim password length
 	PASSWORD_MIN_LENGTH =4
+
+	# Maximum password length
 	PASSWORD_MAX_LENGTH= 40
+
+	# Maximum email length
 	EMAIL_MAX_LENGTH =50
+
+	# Screen Name range
 	SCREEN_NAME_RANGE = SCREEN_NAME_MIN_LENGTH..SCREEN_NAME_MAX_LENGTH
+
+	# Password Range
 	PASSWORD_RANGE = PASSWORD_MIN_LENGTH..PASSWORD_MAX_LENGTH
 
 	# Text box sizes for display in the views
+	
+	# Screen name size.
 	SCREEN_NAME_SIZE = 20
+
+	# Password size
 	PASSWORD_SIZE = 10
+
+	# Email size
 	EMAIL_SIZE = 30
 
 
 
 	# Validations
 	validates_uniqueness_of :screen_name, :email
+	validates_confirmation_of :password
 	validates_length_of :screen_name, :within => SCREEN_NAME_RANGE
 	validates_length_of :password, :within => PASSWORD_RANGE
 	validates_length_of :email, :maximum => EMAIL_MAX_LENGTH
@@ -53,6 +81,8 @@ class User < ActiveRecord::Base
 	# Clear the password (typically to suppress its display in a view.).
 	def clear_password!
 		self.password=nil
+		self.password_confirmation = nil
+		self.current_password = nil
 	end
 
 	# Remember a user for future login.

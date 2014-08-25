@@ -117,15 +117,14 @@
 
         <div class="method-description">
           
-          
+          <p>Return true if some user us logged in, false otherwise.</p>
           
           
 
           
           <div class="method-source-code" id="logged_in-3F-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">logged_in?</span>
-        <span class="ruby-comment"># Return true if some user us logged in, false otherwise.</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">logged_in?</span>         
         <span class="ruby-keyword">not</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>].<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -151,15 +150,14 @@
 
         <div class="method-description">
           
-          
+          <p>Return a link for use un layout navigation</p>
           
           
 
           
           <div class="method-source-code" id="nav_link-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 3</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">nav_link</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span>=<span class="ruby-string">&quot;index&quot;</span>)
-        <span class="ruby-comment"># Return a link for use un layout navigation</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nav_link</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span>=<span class="ruby-string">&quot;index&quot;</span>)         
         <span class="ruby-identifier">link_to_unless_current</span> <span class="ruby-identifier">text</span>,  <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>,
                                                                         <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>
 <span class="ruby-keyword">end</span></pre>

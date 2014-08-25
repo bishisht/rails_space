@@ -8,13 +8,11 @@ class UserController < ApplicationController
   # This is the user hub page.
   def index
     @title= "Rails Space User Hub"
-    # This will be a protedted page for viewing user information.
+    @user=User.find(session[:user_id])    
   end
 
-  
+  # This action is used for logging in users.
   def login
-    # This action is used for logging in users.
-
     @title="Log in to RailsSpace"
     if request.get?
       @user=User.new(:remember_me => remember_me_string)
@@ -66,6 +64,29 @@ class UserController < ApplicationController
     redirect_to(:action => 'index', :controller => 'site')
   end
 
+  # Edit the user's basic info.
+  def edit
+    @title = "Edit basic info"
+    @user= User.find(session[:user_id])
+    if param_posted?(:user)
+      attribute = params[:attribute]
+      case attribute
+      when "email"
+        try_to_update @user, attribute
+      when "paassword"
+        # Handle password submission.
+      end
+    # end
+          
+    #   if @user.update_attributes(user_params)
+    #     flash[:notice]="#{@user.screen_name}'s Email updated."
+    #     redirect_to :action => "index"
+    #   end
+    # end
+    # For security purposes, never fill in password fields.
+    @user.clear_password!
+  end
+
   def user_params
     params.require(:user).permit(:screen_name, :email, :password )
   end
@@ -99,11 +120,16 @@ class UserController < ApplicationController
 
   # Protect a page from unauthorized access.
   def protect
-    unless logged_in?
-    # user.login!(session)
-      session[:protected_page]=request.request_uri
+    # unless logged_in?
+    # # user.login!(session)
+    #   session[:protected_page]=request.request_uri
+    #   flash[:notice] = "Please log in first."
+    #   redirect_to :action => "login", :controller => "user"
+    #   return false
+    # end
+    unless session[:user_id]
       flash[:notice] = "Please log in first."
-      redirect_to :action => "login", :controller => "user"
+      redirect_to :action => "login"
       return false
     end
   end
@@ -128,5 +154,12 @@ class UserController < ApplicationController
     cookies[:remember_me] || "0"
   end
 
+  # Try to update the user, redirecting if successful.
+  def try_to_update(user,attribute)
+    if user.update_attributes(params[:user])
+      flash[:notice] = "#{@user.screen_name}'s  #{attribute} updated"
+      redirect_to :action => "index"
+    end
+  end
 
 end

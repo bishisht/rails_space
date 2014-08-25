@@ -13,6 +13,7 @@
 	<div id="nav">
 		<span style="float:right">
 		<% if logged_in? -%>
+			welcome <i><%= @user.screen_name %></i>  |
 			<%= nav_link "Hub", "user", "index"  %> |
 			<%= nav_link "Logout", "user", "logout"  %> |
 		<% else -%>

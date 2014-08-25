@@ -67,7 +67,17 @@
 
     
     
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-check_authorization">#check_authorization</a>
+    
+  </ul>
+</div>
+
   </div>
 </nav>
 
@@ -78,6 +88,9 @@
 
   <section class="description">
     
+<p>The main Applicatoin Controller. Methods created where can be used in all
+controllers.</p>
+
   </section>
 
   
@@ -93,6 +106,57 @@
     
 
     
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-check_authorization" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_authorization</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pick a unique cookie name to distinguish our session data from others&#39;
+session :session_key =&gt; &#39;_rails_space_session_id&#39; Check for a
+valid authorization cookie, possibly logging the user in.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="check_authorization-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_authorization</span>
+  <span class="ruby-identifier">authorization_token</span> = <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:authorization_token</span>]
+  <span class="ruby-comment"># if cookies[:authorization_token] and not session[:user_id]</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">authorization_token</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">logged_in?</span>
+      <span class="ruby-identifier">user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_authorization_token</span>(<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:authorization_token</span>])
+      <span class="ruby-comment"># if user</span>
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">login?</span>(<span class="ruby-identifier">session</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>
+          <span class="ruby-comment"># session[:user_id]=user.id</span>
+      <span class="ruby-comment"># end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
   </section>
 </main>
 

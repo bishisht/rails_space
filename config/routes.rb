@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'user/register'
   post 'user/login'
   get 'user/login'
+  post 'user/edit'
 
   # resources :user
 

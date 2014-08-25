@@ -1,3 +1,4 @@
+# The main Applicatoin Controller. Methods created where can be used in all controllers.
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
