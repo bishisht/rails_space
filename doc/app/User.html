@@ -77,9 +77,13 @@
     
     <li ><a href="#method-i-clear_password-21">#clear_password!</a>
     
+    <li ><a href="#method-i-correct_password-3F">#correct_password?</a>
+    
     <li ><a href="#method-i-forget-21">#forget!</a>
     
     <li ><a href="#method-i-login-21">#login!</a>
+    
+    <li ><a href="#method-i-password_errors">#password_errors</a>
     
     <li ><a href="#method-i-remember-21">#remember!</a>
     
@@ -180,6 +184,19 @@
       </header>
 
       
+      <div id="attribute-i-current_password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">current_password</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>For using in view.</p>
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-remember_me" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">remember_me</span><span
@@ -223,10 +240,10 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="logout-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">logout!</span>(<span class="ruby-identifier">session</span>,<span class="ruby-identifier">cookies</span>)
-        <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-keyword">nil</span>
-        <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:authorization_token</span>)
+  <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:authorization_token</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -265,9 +282,45 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="clear_password-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 80</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_password!</span>
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>=<span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>=<span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_confirmation</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">current_password</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-correct_password-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">correct_password?</span><span
+            class="method-args">(params)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return true if the password from params is correct.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="correct_password-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">correct_password?</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">current_password</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>][<span class="ruby-value">:current_password</span>]
+  <span class="ruby-identifier">password</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">current_password</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -298,9 +351,9 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="forget-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 97</span>
-      <span class="ruby-keyword">def</span> <span class="ruby-identifier">forget!</span>(<span class="ruby-identifier">cookies</span>)
-              <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:remember_me</span>)
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">forget!</span>(<span class="ruby-identifier">cookies</span>)
+  <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:remember_me</span>)
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:authorization_token</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -332,9 +385,49 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="login-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login!</span>(<span class="ruby-identifier">session</span>)
-        <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-identifier">id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-password_errors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">password_errors</span><span
+            class="method-args">(params)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generate messages for password errors.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="password_errors-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password_errors</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-comment"># Use User model&#39;s valid? method to ggenerate error messages</span>
+  <span class="ruby-comment"># for a password mismatch (if any).</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>][<span class="ruby-value">:password</span>]
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_confirmation</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>][<span class="ruby-value">:password_confirmation</span>]
+  <span class="ruby-identifier">valid?</span>
+  <span class="ruby-comment"># The current password is incorrect, so add an error message.</span>
+
+  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:current_password</span>, <span class="ruby-string">&quot;is incorrect&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -365,16 +458,16 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="remember-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remember!</span>(<span class="ruby-identifier">cookies</span>)
-        <span class="ruby-identifier">cookie_expiration</span> = <span class="ruby-value">10</span>.<span class="ruby-identifier">years</span>.<span class="ruby-identifier">from_now</span>
-        <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:remember_me</span>] = {<span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;1&quot;</span>,
-                                                                                                                <span class="ruby-value">:expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cookie_expiration</span>}
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authorization_token</span> = <span class="ruby-identifier">unique_identifier</span>
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save!</span>
-        <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:authorization_token</span>] = {
-                <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authorization_token</span>,
-                <span class="ruby-value">:expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cookie_expiration</span> }
+  <span class="ruby-identifier">cookie_expiration</span> = <span class="ruby-value">10</span>.<span class="ruby-identifier">years</span>.<span class="ruby-identifier">from_now</span>
+  <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:remember_me</span>] = {<span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;1&quot;</span>,
+                            <span class="ruby-value">:expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cookie_expiration</span>}
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authorization_token</span> = <span class="ruby-identifier">unique_identifier</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:authorization_token</span>] = {
+    <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authorization_token</span>,
+    <span class="ruby-value">:expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cookie_expiration</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -405,9 +498,9 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="remember_me-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remember_me?</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">remember_me</span> <span class="ruby-operator">==</span><span class="ruby-string">&quot;1&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">remember_me</span> <span class="ruby-operator">==</span><span class="ruby-string">&quot;1&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -436,7 +529,7 @@ the browser window.</p>
 
 <pre class="ruby">:<span class="ruby-identifier">with</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-regexp">/^[A-Z0-9_]*$/i</span>,
 :<span class="ruby-identifier">message</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;must contain only letters,&quot;</span> <span class="ruby-operator">+</span>
-                        <span class="ruby-string">&quot;numbers, and underscores&quot;</span>
+      <span class="ruby-string">&quot;numbers, and underscores&quot;</span>
 </pre>
 
 <p>validates_format_of :email,</p>
@@ -449,12 +542,12 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="validate-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 61</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate</span>
-        <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:email</span>, <span class="ruby-string">&quot;must be valid.&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">email</span>.<span class="ruby-identifier">include?</span> (<span class="ruby-string">&quot;@&quot;</span>)
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">screen_name</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot; &quot;</span>)
-                <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:screen_name</span>, <span class="ruby-string">&quot;cannot include spaces.&quot;</span>)
-        <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:email</span>, <span class="ruby-string">&quot;must be valid.&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">email</span>.<span class="ruby-identifier">include?</span> (<span class="ruby-string">&quot;@&quot;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">screen_name</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot; &quot;</span>)
+    <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:screen_name</span>, <span class="ruby-string">&quot;cannot include spaces.&quot;</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

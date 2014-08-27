@@ -84,6 +84,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-edit">#edit</a>
+    
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-login">#login</a>
@@ -91,8 +93,6 @@
     <li ><a href="#method-i-logout">#logout</a>
     
     <li ><a href="#method-i-register">#register</a>
-    
-    <li ><a href="#method-i-user_params">#user_params</a>
     
   </ul>
 </div>
@@ -107,6 +107,8 @@
 
   <section class="description">
     
+<p>Simple user controller.</p>
+
   </section>
 
   
@@ -128,6 +130,55 @@
        </header>
 
     
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Edit the user&#39;s basic info.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&quot;Edit basic info&quot;</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">param_posted?</span>(<span class="ruby-value">:user</span>)
+    <span class="ruby-identifier">attribute</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:attribute</span>]
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">attribute</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;email&quot;</span>
+      <span class="ruby-identifier">try_to_update</span> <span class="ruby-ivar">@user</span>, <span class="ruby-identifier">attribute</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;password&quot;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">correct_password?</span>(<span class="ruby-identifier">params</span>)
+        <span class="ruby-identifier">try_to_update</span> <span class="ruby-ivar">@user</span>, <span class="ruby-identifier">attribute</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">password_errors</span>(<span class="ruby-identifier">params</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># For security purposes, never fill in password fields.</span>
+  <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">clear_password!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
@@ -147,10 +198,10 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@title</span>= <span class="ruby-string">&quot;Rails Space User Hub&quot;</span>
-  <span class="ruby-comment"># This will be a protedted page for viewing user information.</span>
+  <span class="ruby-ivar">@user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])    
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -175,16 +226,14 @@
 
         <div class="method-description">
           
-          
+          <p>This action is used for logging in users.</p>
           
           
 
           
           <div class="method-source-code" id="login-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login</span>
-  <span class="ruby-comment"># This action is used for logging in users.</span>
-
   <span class="ruby-ivar">@title</span>=<span class="ruby-string">&quot;Log in to RailsSpace&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get?</span>
     <span class="ruby-ivar">@user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:remember_me</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">remember_me_string</span>)
@@ -194,34 +243,15 @@
     <span class="ruby-identifier">user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_screen_name_and_password</span>(<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">screen_name</span>, <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">password</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>
       <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
-      <span class="ruby-comment"># user.login!(session)</span>
       <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">remember_me</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;1&quot;</span>
         <span class="ruby-identifier">user</span>.<span class="ruby-identifier">remember!</span>(<span class="ruby-identifier">cookies</span>)
-        <span class="ruby-comment"># # The box is checked, so set the remember_me cookie.</span>
-        <span class="ruby-comment"># cookies[:remember_me] = { :value =&gt; &quot;1&quot;,</span>
-        <span class="ruby-comment">#                           :expires =&gt; 10.years.from_now }</span>
-        <span class="ruby-comment"># # user.authorization_token = user.id</span>
-        <span class="ruby-comment"># user.authorization_token = Digest::SHA1.hexdigest(</span>
-        <span class="ruby-comment">#                             &quot;#{user.screen_name}:</span>
-        <span class="ruby-comment">#                             #{user.paassword}&quot;)</span>
-        <span class="ruby-comment"># user.save!</span>
-        <span class="ruby-comment"># cookies[:authorization_token] = {</span>
-        <span class="ruby-comment">#   :value =&gt; user.authorization_token,</span>
-        <span class="ruby-comment">#   :expires =&gt; 10.years.from_now }</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">user</span>.<span class="ruby-identifier">forget!</span>(<span class="ruby-identifier">cookies</span>)
       <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-node">&quot;User #{user.screen_name} logged in!&quot;</span>
       <span class="ruby-identifier">redirect_to_forwarding_url</span>
-      <span class="ruby-comment"># if (redirect_url = session[:protected_page])</span>
-      <span class="ruby-comment">#   session[:protected_page]=nil</span>
-      <span class="ruby-comment">#   redirect_to redirect_url</span>
-      <span class="ruby-comment"># else</span>
-      <span class="ruby-comment">#   redirect_to :action =&gt; &quot;index&quot;</span>
-      <span class="ruby-comment"># end</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># Dont show the password again in the view.</span>
-      <span class="ruby-comment"># @user.password=nil  </span>
       <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">clear_password!</span>
       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Invalid screen_name/password combination!&quot;</span>
     <span class="ruby-keyword">end</span>
@@ -256,9 +286,8 @@
 
           
           <div class="method-source-code" id="logout-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">logout</span>
-  <span class="ruby-comment"># session[:user_id]=nil</span>
   <span class="ruby-constant">User</span>.<span class="ruby-identifier">logout!</span>(<span class="ruby-identifier">session</span>,<span class="ruby-identifier">cookies</span>)
   <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] =<span class="ruby-string">&quot;Logged out!&quot;</span>
   <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;index&#39;</span>, <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;site&#39;</span>)
@@ -292,60 +321,20 @@
 
           
           <div class="method-source-code" id="register-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">register</span>
       <span class="ruby-ivar">@title</span>=<span class="ruby-string">&quot;Register&quot;</span>
-      <span class="ruby-comment"># if request.post? and params[:user]</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">param_posted?</span>(<span class="ruby-value">:user</span>)
               <span class="ruby-ivar">@user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">user_params</span>)
               <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
       <span class="ruby-comment"># session[:user_id]=@user.id</span>
       <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">login!</span>(<span class="ruby-identifier">session</span>)
       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-node">&quot;User #{@user.screen_name} created!&quot;</span>
-      <span class="ruby-identifier">redirect_to_forwarding_url</span>
-      <span class="ruby-comment"># if (redirect_url = session[:protected_page])</span>
-      <span class="ruby-comment">#   session[:protected_page] = nil</span>
-      <span class="ruby-comment">#   redirect_to redirect_url</span>
-      <span class="ruby-comment"># else</span>
-      <span class="ruby-comment">#   redirect_to :action =&gt; &#39;index&#39;</span>
-      <span class="ruby-comment"># end  </span>
+      <span class="ruby-identifier">redirect_to_forwarding_url</span>         
     <span class="ruby-keyword">else</span>
       <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">clear_password!</span>
     <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-user_params" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">user_params</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="user_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">user_params</span>
-  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:screen_name</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:password</span> )
 <span class="ruby-keyword">end</span></pre>
           </div>
           

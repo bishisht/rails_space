@@ -1,9 +1,11 @@
 # The main Applicatoin Controller. Methods created where can be used in all controllers.
 class ApplicationController < ActionController::Base
+  
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  # check authorization status
   before_filter :check_authorization
 
   # Pick a unique cookie name to distinguish our session data from others'
@@ -19,6 +21,16 @@ class ApplicationController < ActionController::Base
             # session[:user_id]=user.id
         # end
     end
+  end
+
+  # Enforcing only necessary parameters. 
+  def user_params
+    params.require(:user).permit(:screen_name, :email, :password, :attribute)
+  end
+
+  # Return true of a parameter corresponding to the given symbol was posted.
+  def param_posted?(sym)
+    request.post? and params[sym]
   end
 
   # screen_name = User.screen_name

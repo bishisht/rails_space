@@ -1,4 +1,6 @@
 require 'digest/sha1'
+
+# Simple user controller.
 class UserController < ApplicationController
   include ApplicationHelper
 
@@ -9,13 +11,6 @@ class UserController < ApplicationController
   def index
     @title= "Rails Space User Hub"
     @user=User.find(session[:user_id])    
-  end
-
-
-
-  # Enforcing only necessary parameters. 
-  def user_params
-    params.require(:user).permit(:screen_name, :email, :password, :attribute)
   end
 
 

@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
+  
+  get 'spec/index'
+
+  get 'spec/edit'
+
   root 'site#index'
+  # map.connect 'profile/:screen_name', :controller => 'profile', :action => 'show'
+  # match 'profile/(:screen_name))', :controller => 'profile', :action => 'show', :via => :get
+  get 'profile/index'
+  #get 'profile/show'
+
+
+  
 
   get 'user/index'
   post 'user/register'
@@ -25,6 +37,7 @@ Rails.application.routes.draw do
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  get 'profile/:screen_name' => 'profile#show', as: :show
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
@@ -68,5 +81,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-    match ':controller(/:action(/:id))', :via => :get
+  match ':controller(/:action(/:id))', :via => :get
 end

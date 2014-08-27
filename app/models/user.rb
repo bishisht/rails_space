@@ -3,9 +3,13 @@ require 'digest/sha1'
 # Simple model for users
 class User < ActiveRecord::Base
 
+  has_one :spec
+
   # Remember me attribute. This will remember the user 
   # after they have closed the browser window.
   attr_accessor :remember_me
+
+  # For using in view.
   attr_accessor :current_password
 
   # Max & min lengths for all fields
