@@ -1,8 +1,9 @@
 # User specification model.
 class Spec < ActiveRecord::Base
+	
 	belongs_to :user
 
-	list of all the attributes that we will allow the user to edit
+	# list of all the attributes that we will allow the user to edit
 	ALL_FIELDS = %w(first_name last_name occupation gender birthdate city state zip_code)
 
 	# array of strings specifying which fields are strings whose length should be validated.
@@ -34,4 +35,16 @@ class Spec < ActiveRecord::Base
 							:message => "please enter date"
 	validates_format_of :zip_code, :with => /(^$|^[0-9]{#{ZIP_CODE_LENGTH}}$)/,
 						:message => "must be a five digit number"
+
+
+
+	# Return the full name (first plus last).
+	def full_name
+		[first_name, last_name].join(" ")
+	end
+
+	# Returb a sensibly formatted location string.
+	def location
+		[city,state, zip_code].join(" ")
+	end
 end

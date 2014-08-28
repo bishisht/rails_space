@@ -1,9 +1,49 @@
-<h2>Your basic information</h2>
-<ul>
-	<li>Screen name: <%= @user.screen_name %></li>
-	<li>Emaail: <%= @user.email %></li>
-	<li>Password: **********</li>
-</ul>
-<ul>
-	<li><%= link_to "Edit my info", :action => "edit" %></li>
-</ul>
+<h1>User Hub</h1>
+<div id="left_column">
+	<div class="sidebar_box">	
+		<h2>
+			<span class="header">Basic User Info</span>
+			<span class="edit_link"><%= link_to "(edit)", :action => "edit" %></span>
+			<br clear="all" />
+		</h2>
+		<div class="sidebar_box_contents">
+			<table>
+				<tr>
+					<td class="label">Screen name:</td>
+					<td><%= @user.screen_name %></td>
+				</tr>
+
+				<tr>
+					<td class="label">Email:</td>
+					<td><%= @user.email %></td>
+				</tr>
+				<tr>
+					<td class="label"> Password:</td>
+					<td>*******</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div class="sidebar_box">
+		<h2>
+			<span class="header">Spec</span>
+			<span class="edit_link">
+				<%= link_to "(edit)", :controller => "spec", :action => "edit" %>
+	 		</span>
+	 		<br clear="all" />
+		</h2>
+		<div class="side_bar_contents">
+			<table>
+				<%= render :partial => "spec/field_row",
+							:collection => Spec::ALL_FIELDS %>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="main_content">
+	Empty right column,for now.
+</div>

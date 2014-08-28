@@ -240,7 +240,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="logout-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">logout!</span>(<span class="ruby-identifier">session</span>,<span class="ruby-identifier">cookies</span>)
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:authorization_token</span>)
@@ -282,7 +282,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="clear_password-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 84</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_password!</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>=<span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_confirmation</span> = <span class="ruby-keyword">nil</span>
@@ -317,7 +317,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="correct_password-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">correct_password?</span>(<span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">current_password</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>][<span class="ruby-value">:current_password</span>]
   <span class="ruby-identifier">password</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">current_password</span>
@@ -351,7 +351,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="forget-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forget!</span>(<span class="ruby-identifier">cookies</span>)
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:remember_me</span>)
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:authorization_token</span>)
@@ -385,7 +385,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="login-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 73</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login!</span>(<span class="ruby-identifier">session</span>)
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-identifier">id</span>
 <span class="ruby-keyword">end</span></pre>
@@ -418,7 +418,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="password_errors-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 120</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">password_errors</span>(<span class="ruby-identifier">params</span>)
   <span class="ruby-comment"># Use User model&#39;s valid? method to ggenerate error messages</span>
   <span class="ruby-comment"># for a password mismatch (if any).</span>
@@ -458,7 +458,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="remember-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remember!</span>(<span class="ruby-identifier">cookies</span>)
   <span class="ruby-identifier">cookie_expiration</span> = <span class="ruby-value">10</span>.<span class="ruby-identifier">years</span>.<span class="ruby-identifier">from_now</span>
   <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:remember_me</span>] = {<span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;1&quot;</span>,
@@ -498,7 +498,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="remember_me-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 109</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remember_me?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">remember_me</span> <span class="ruby-operator">==</span><span class="ruby-string">&quot;1&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -542,7 +542,7 @@ the browser window.</p>
 
           
           <div class="method-source-code" id="validate-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate</span>
   <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:email</span>, <span class="ruby-string">&quot;must be valid.&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">email</span>.<span class="ruby-identifier">include?</span> (<span class="ruby-string">&quot;@&quot;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">screen_name</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot; &quot;</span>)

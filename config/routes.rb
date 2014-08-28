@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   get 'spec/index'
 
-  get 'spec/edit'
+  post 'spec/edit'
 
   root 'site#index'
   # map.connect 'profile/:screen_name', :controller => 'profile', :action => 'show'

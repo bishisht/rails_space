@@ -10,7 +10,9 @@ class UserController < ApplicationController
   # This is the user hub page.
   def index
     @title= "Rails Space User Hub"
-    @user=User.find(session[:user_id])    
+    @user=User.find(session[:user_id])   
+    @spec = Spec.new
+    @user.spec =@spec.user
   end
 
 
@@ -90,14 +92,6 @@ class UserController < ApplicationController
   # Private actions.
   private
 
-  # Protect a page from unauthorized access.
-  def protect
-    unless session[:user_id]
-      flash[:notice] = "Please log in first."
-      redirect_to :action => "login"
-      return false
-    end
-  end
 
   # Return true if a parameter corresponding to the given symbol was posted.
   def param_posted?(symbol)

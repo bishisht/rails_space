@@ -28,10 +28,25 @@ class ApplicationController < ActionController::Base
     params.require(:user).permit(:screen_name, :email, :password, :attribute)
   end
 
+  # Enforcing only necessary parameters. 
+  def spec_params
+    params.require(:spec).permit(:first_name, :last_name, :gender, :birthdate, :occupation, :city, :state, :zip_code)
+  end
+
   # Return true of a parameter corresponding to the given symbol was posted.
   def param_posted?(sym)
     request.post? and params[sym]
   end
 
-  # screen_name = User.screen_name
+  
+  # Protect a page from unauthorized access.
+  def protect
+    unless session[:user_id]
+      flash[:notice] = "Please log in first."
+      redirect_to :action => "login", :controller => "user"
+      return false
+    end
+  end
+
+
 end

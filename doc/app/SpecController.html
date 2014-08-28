@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class ProfileController - Rails Application Documentation</title>
+<title>class SpecController - Rails Application Documentation</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -73,9 +73,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-index">#index</a>
+    <li ><a href="#method-i-edit">#edit</a>
     
-    <li ><a href="#method-i-show">#show</a>
+    <li ><a href="#method-i-index">#index</a>
     
   </ul>
 </div>
@@ -83,14 +83,14 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-ProfileController">
-  <h1 id="class-ProfileController" class="class">
-    class ProfileController
+<main role="main" aria-labelledby="class-SpecController">
+  <h1 id="class-SpecController" class="class">
+    class SpecController
   </h1>
 
   <section class="description">
     
-<p>Profile controller.</p>
+<p><a href="User.html">User</a> specification controller.</p>
 
   </section>
 
@@ -113,6 +113,52 @@
        </header>
 
     
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Edit the user&#39;s spec.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/spec_controller.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+      <span class="ruby-ivar">@title</span> = <span class="ruby-string">&quot;Edit Spec&quot;</span>
+      <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+      <span class="ruby-comment"># @user.spec || Spec.new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@user</span>
+    <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span> = <span class="ruby-constant">Spec</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">end</span>
+      <span class="ruby-ivar">@spec</span>=<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">param_posted?</span>(<span class="ruby-value">:spec</span>)
+              <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:spec</span>])
+                      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Changes saved.&quot;</span>
+                      <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;index&quot;</span>
+              <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
@@ -126,55 +172,15 @@
 
         <div class="method-description">
           
-          <p>Display profile index</p>
+          <p>Redirect to user hub</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/profile_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/spec_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-      <span class="ruby-ivar">@title</span> = <span class="ruby-string">&quot;RailsSpace Profiles&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-show" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">show</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Show a particular user</p>
-          
-          
-
-          
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/profile_controller.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-      <span class="ruby-identifier">screen_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:screen_name</span>]
-      <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_screen_name</span>(<span class="ruby-identifier">screen_name</span>)
-      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>
-              <span class="ruby-ivar">@title</span> = <span class="ruby-node">&quot;My RailsSpace Profile for #{screen_name}&quot;</span>
-      <span class="ruby-keyword">else</span>
-              <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-node">&quot;No user #{screen_name} at RailsSpace!&quot;</span> 
-              <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;index&quot;</span>
-      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;index&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
