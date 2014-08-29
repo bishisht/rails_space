@@ -132,18 +132,15 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/spec_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/spec_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
       <span class="ruby-ivar">@title</span> = <span class="ruby-string">&quot;Edit Spec&quot;</span>
-      <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
-      <span class="ruby-comment"># @user.spec || Spec.new</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@user</span>
-    <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span> = <span class="ruby-constant">Spec</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">end</span>
-      <span class="ruby-ivar">@spec</span>=<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span>
+      <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])         
+      <span class="ruby-ivar">@spec</span> = <span class="ruby-constant">Spec</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span> =<span class="ruby-ivar">@spec</span>.<span class="ruby-identifier">user</span>
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">param_posted?</span>(<span class="ruby-value">:spec</span>)
-              <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:spec</span>])
+              <span class="ruby-keyword">if</span> <span class="ruby-ivar">@spec</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">spec_params</span>)
                       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Changes saved.&quot;</span>
                       <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;index&quot;</span>
               <span class="ruby-keyword">end</span>
@@ -178,7 +175,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/spec_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/spec_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
       <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;index&quot;</span>
 <span class="ruby-keyword">end</span></pre>

@@ -4,6 +4,8 @@ require 'digest/sha1'
 class UserController < ApplicationController
   include ApplicationHelper
 
+  helper :profile
+
   #Protect pages
   before_filter :protect, :except => [ :login, :register ]
 

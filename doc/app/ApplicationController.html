@@ -77,6 +77,10 @@
     
     <li ><a href="#method-i-param_posted-3F">#param_posted?</a>
     
+    <li ><a href="#method-i-protect">#protect</a>
+    
+    <li ><a href="#method-i-spec_params">#spec_params</a>
+    
     <li ><a href="#method-i-user_params">#user_params</a>
     
   </ul>
@@ -178,9 +182,79 @@ valid authorization cookie, possibly logging the user in.</p>
 
           
           <div class="method-source-code" id="param_posted-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">param_posted?</span>(<span class="ruby-identifier">sym</span>)
   <span class="ruby-identifier">request</span>.<span class="ruby-identifier">post?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">sym</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-protect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">protect</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Protect a page from unauthorized access.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="protect-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">protect</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Please log in first.&quot;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;login&quot;</span>, <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-spec_params" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">spec_params</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Enforcing only necessary parameters.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="spec_params-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">spec_params</span>
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:spec</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:first_name</span>, <span class="ruby-value">:last_name</span>, <span class="ruby-value">:gender</span>, <span class="ruby-value">:birthdate</span>, <span class="ruby-value">:occupation</span>, <span class="ruby-value">:city</span>, <span class="ruby-value">:state</span>, <span class="ruby-value">:zip_code</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
