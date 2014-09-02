@@ -46,7 +46,7 @@
 
 <div id="main_content">
 	<div id="full_name">
-		
+		<%= @user.spec.full_name.or_else("Your Name") %>
 	</div>
 	<div id="occupation">
 		

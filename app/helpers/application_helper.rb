@@ -1,6 +1,7 @@
 
 # Actions defined in this helper files can be used in all views.
 module ApplicationHelper
+  require 'string'
 
   # Return a link for use un layout navigation
   def nav_link(text, controller, action="index")    

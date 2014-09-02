@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>module ProfileHelper - Rails Application Documentation</title>
+<title>class String - Rails Application Documentation</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 <script src="./js/darkfish.js"></script>
 
 
-<body id="top" role="document" class="module">
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -57,7 +57,14 @@
 
   <div id="class-metadata">
     
-    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
     
     
     <!-- Method Quickref -->
@@ -66,7 +73,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-profile_for">#profile_for</a>
+    <li ><a href="#method-i-or_else">#or_else</a>
     
   </ul>
 </div>
@@ -74,15 +81,13 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-ProfileHelper">
-  <h1 id="module-ProfileHelper" class="module">
-    module ProfileHelper
+<main role="main" aria-labelledby="class-String">
+  <h1 id="class-String" class="class">
+    class String
   </h1>
 
   <section class="description">
     
-<p>This contains actions that are needed in profile views</p>
-
   </section>
 
   
@@ -104,11 +109,11 @@
        </header>
 
     
-      <div id="method-i-profile_for" class="method-detail ">
+      <div id="method-i-or_else" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">profile_for</span><span
-            class="method-args">(user)</span>
+          <span class="method-name">or_else</span><span
+            class="method-args">(alternate)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -117,15 +122,15 @@
 
         <div class="method-description">
           
-          <p>Return the user&#39;s profile URL.</p>
+          <p>Return an alternate string if blank.</p>
           
           
 
           
-          <div class="method-source-code" id="profile_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/profile_helper.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">profile_for</span>(<span class="ruby-identifier">user</span>)
-        <span class="ruby-identifier">profile_url</span>(<span class="ruby-value">:screen_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">screen_name</span>)
+          <div class="method-source-code" id="or_else-source">
+            <pre><span class="ruby-comment"># File lib/string.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">or_else</span>(<span class="ruby-identifier">alternate</span>)
+        <span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">alternate</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

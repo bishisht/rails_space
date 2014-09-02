@@ -1,6 +1,6 @@
 == README
 
-This application is written by copying and modifying code from Rails Space book. 
+This application is written by copying and modifying code from Rails Space book. I would be happy if someone helps me with this. The main reason of creating this app is for learning and later I realised that facebook is only offering us things that they want us to use but not what we like. This app will be released initially on heroku as a test. If this works you can enjoy the power of open source in social networking sector. This is still in its very early phase. This is mainly for experimental purpose and also for learning rails.
 
 Things you may want to cover:
 

@@ -149,7 +149,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@title</span> = <span class="ruby-string">&quot;Edit basic info&quot;</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
@@ -198,7 +198,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@title</span>= <span class="ruby-string">&quot;Rails Space User Hub&quot;</span>
   <span class="ruby-ivar">@user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])   
@@ -234,7 +234,7 @@
 
           
           <div class="method-source-code" id="login-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login</span>
   <span class="ruby-ivar">@title</span>=<span class="ruby-string">&quot;Log in to RailsSpace&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get?</span>
@@ -288,7 +288,7 @@
 
           
           <div class="method-source-code" id="logout-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">logout</span>
   <span class="ruby-constant">User</span>.<span class="ruby-identifier">logout!</span>(<span class="ruby-identifier">session</span>,<span class="ruby-identifier">cookies</span>)
   <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] =<span class="ruby-string">&quot;Logged out!&quot;</span>
@@ -323,7 +323,7 @@
 
           
           <div class="method-source-code" id="register-source">
-            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/controllers/user_controller.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">register</span>
       <span class="ruby-ivar">@title</span>=<span class="ruby-string">&quot;Register&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">param_posted?</span>(<span class="ruby-value">:user</span>)
